@@ -1,0 +1,32 @@
+{
+    "tests": [
+        {
+            "name": "test1",
+            "event": {
+                "text": "I love this movie"
+            },
+            "context": {}
+        },
+        {
+            "name": "test12",
+            "event": {
+                "text": "I hate this movie"
+            },
+            "context": {}
+        },
+        {
+            "name": "test3",
+            "event": {
+                "text": "I don't know what to say"
+            },
+            "context": {}
+        },
+        {
+            "name": "test4",
+            "event": {
+                "text": "I'm not sure about this"
+            },
+            "context": {}
+        }
+    ]
+}

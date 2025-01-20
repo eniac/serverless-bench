@@ -1,0 +1,11 @@
+{
+    "tests": [
+        {
+            "name": "test1",
+            "event": {
+                "queryStringParameters": {"x": 2.7}
+            },
+            "context": {}
+        }
+    ]
+}

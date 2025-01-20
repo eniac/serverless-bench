@@ -1,0 +1,11 @@
+{
+    "tests": [
+        {
+            "name": "H2 molecule with 0.74 Angstrom bond length",
+            "event": {
+                "molecule": "H .0 .0 .0; H .0 .0 0.74"
+            },
+            "context": {}
+        }
+    ]
+}

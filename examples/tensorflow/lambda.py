@@ -114,7 +114,7 @@ def return_lambda_gateway_response(code, body):
     return {"statusCode": code, "body": json.dumps(body)}
 
 
-def lambda_handler(event, context):
+def handler(event, context):
     """
     This is the function called by AWS Lambda, passing the standard parameters "event" and "context"
     When deployed, you can try it out pointing your browser to
@@ -137,10 +137,3 @@ def lambda_handler(event, context):
         return return_lambda_gateway_response(503, error_response)
 
     return return_lambda_gateway_response(200, {"value": value})
-
-
-if __name__ == "__main__":
-    # for testing purposes
-    event = {"queryStringParameters": {"x": 2.7}}
-    response = lambda_handler(event, None)
-    print(json.loads(response["body"]))

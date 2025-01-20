@@ -1,0 +1,13 @@
+{
+    "tests": [
+        {
+            "name": "test1",
+            "event": {
+                "x": 0.0, 
+                "y": 0.0,
+                "buffer": 10.0
+            },
+            "context": {}
+        }
+    ]
+}

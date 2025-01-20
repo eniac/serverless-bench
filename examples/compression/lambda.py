@@ -5,12 +5,12 @@ import uuid
 
 
 def compress_snappy(path, key):
-    archive = os.path.join(path, '{}.snappy'.format(key))
-    with open(archive, 'wb') as compressed_file:
+    archive = os.path.join(path, "{}.snappy".format(key))
+    with open(archive, "wb") as compressed_file:
         for root, _, files in os.walk(path):
             for file_name in files:
                 file_path = os.path.join(root, file_name)
-                with open(file_path, 'rb') as f:
+                with open(file_path, "rb") as f:
                     file_data = f.read()
                     compressed_data = snappy.compress(file_data)
                     compressed_file.write(compressed_data)
@@ -20,18 +20,12 @@ def compress_snappy(path, key):
 
 
 def handler(event, context=None):
-    local_path = event.get('local_path')
-    folder_name = event.get('folder_name')
+    local_path = event.get("local_path")
+    folder_name = event.get("folder_name")
     archive_name, archive_size = compress_snappy(local_path, folder_name)
 
     return {
-        "result": "{} compression in size {} finished!".format(archive_name, archive_size)
+        "result": "{} compression in size {} finished!".format(
+            archive_name, archive_size
+        )
     }
-
-
-if __name__ == "__main__":
-    event = {
-        'local_path': "./",
-        'folder_name': "acmart"
-    }
-    print(handler(event))

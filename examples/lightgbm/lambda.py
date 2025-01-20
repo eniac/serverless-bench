@@ -1,6 +1,7 @@
 import lightgbm as lgb
 import numpy
 
+
 def handler(event, context=None):
     dataset_name = event.get("dataset_name")
     dataset = numpy.loadtxt(dataset_name, delimiter=",")
@@ -10,12 +11,5 @@ def handler(event, context=None):
     model = event.get("model")
     bst = lgb.Booster(model_file=model)
     Ypred = bst.predict(X)
-    
-    return numpy.mean((Ypred>0.5)==(Y==1))
 
-if __name__ == "__main__":
-    event = {
-        "dataset_name": "pima-indians-diabetes.csv",
-        "model": "model.txt"
-    }
-    print(handler(event))
+    return numpy.mean((Ypred > 0.5) == (Y == 1))

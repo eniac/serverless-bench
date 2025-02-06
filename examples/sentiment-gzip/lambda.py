@@ -5,21 +5,19 @@ import pickle
 # Suppress specific scikit-learn warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="sklearn")
 
-CLASSES = {
-    0: "negative",
-    4: "positive"
-}
+CLASSES = {0: "negative", 4: "positive"}
 
-MODEL_FILE = 'model.dat.gz'
-with gzip.open(MODEL_FILE, 'rb') as f:
-    MODEL = pickle.load(f, encoding='latin1')
+MODEL_FILE = "model.dat.gz"
+with gzip.open(MODEL_FILE, "rb") as f:
+    MODEL = pickle.load(f, encoding="latin1")
+
 
 # pylint: disable=unused-argument
-def lambda_handler(event, context=None):
+def handler(event, context=None):
     """
-        Validate parameters and call the recommendation engine
-        @event: API Gateway's POST body;
-        @context: LambdaContext instance;
+    Validate parameters and call the recommendation engine
+    @event: API Gateway's POST body;
+    @context: LambdaContext instance;
     """
 
     # input validation
@@ -33,8 +31,8 @@ def lambda_handler(event, context=None):
 
 def predict(text):
     """
-        Predict the sentiment of a string
-        @text: string - the string to be analyzed
+    Predict the sentiment of a string
+    @text: string - the string to be analyzed
     """
 
     x_vector = MODEL.vectorizer.transform([text])
@@ -42,8 +40,9 @@ def predict(text):
 
     return CLASSES.get(y_predicted[0])
 
+
 if __name__ == "__main__":
-    print(lambda_handler({"text": "I love this movie"}))
-    print(lambda_handler({"text": "I hate this movie"}))
-    print(lambda_handler({"text": "I don't know what to say"}))
-    print(lambda_handler({"text": "I'm not sure about this"}))
+    print(handler({"text": "I love this movie"}))
+    print(handler({"text": "I hate this movie"}))
+    print(handler({"text": "I don't know what to say"}))
+    print(handler({"text": "I'm not sure about this"}))

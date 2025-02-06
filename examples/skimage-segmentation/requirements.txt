@@ -1,2 +1,0 @@
-scikit-image==0.24.0
-urllib3==2.2.3

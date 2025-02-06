@@ -1,0 +1,20 @@
+{
+    "tests": [
+        {
+            "name": "test1",
+            "event": {
+                "url": "https://upload.wikimedia.org/wikipedia/commons/3/38/JPEG_example_JPG_RIP_001.jpg",
+                "filename": "hi.jpg"
+            },
+            "context": {}
+        },
+        {
+            "name": "test2",
+            "event": {
+                "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/The_Parthenon_in_Athens.jpg",
+                "filename": "parthenon.jpg"
+            },
+            "context": {}
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "tests": [
+        {
+            "name": "test1",
+            "event": {
+                "queryStringParameters": {
+                    "medInc": 200000,
+                    "houseAge": 10,
+                    "aveRooms": 4,
+                    "aveBedrms": 1,
+                    "population": 800,
+                    "aveOccup": 3,
+                    "latitude": 37.54,
+                    "longitude": -121.72
+                }
+            },
+            "context": {}
+        }
+    ]
+}

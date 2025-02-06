@@ -1,8 +1,9 @@
 import requests
 from lxml import html
 
+
 def handler(event, context):
-    url = "https://github.com/spyrospav"
+    url = event["url"]
     response = requests.request("GET", url)
     tree = html.fromstring(response.content)
     # Extract the username using XPath
@@ -12,6 +13,3 @@ def handler(event, context):
     username = username.strip()
 
     return username
-
-if __name__ == "__main__":
-    print(handler(42, 42))

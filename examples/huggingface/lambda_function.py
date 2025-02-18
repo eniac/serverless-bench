@@ -36,6 +36,8 @@ def serverless_pipeline(model_path='./model'):
 question_answering_pipeline = serverless_pipeline()
 
 def handler(event, context=None):
+    if "raise_error" in event:
+        raise AttributeError("Test error")
     sleep_time = event.get("sleep_time", 0)
     event = {
         'body': json.dumps({

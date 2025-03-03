@@ -1,8 +1,11 @@
 import time
+
 IMPORT_START_TIME = time.time()
-from textblob import TextBlob
 import os
-IMPORT_END_TIME = time.time()
+
+from textblob import TextBlob
+
+import_time = time.time() - IMPORT_START_TIME
 
 os.environ["NLTK_DATA"] = "/task/var/nltk_data/"
 
@@ -29,5 +32,5 @@ def handler(event, context=None):
         "result": "Sentiment analysis finished! Subjectivity {}, Polarity {}.".format(
             subjectivity, polarity
         ),
-        "import_time": IMPORT_END_TIME - IMPORT_START_TIME
+        "import_time": import_time,
     }

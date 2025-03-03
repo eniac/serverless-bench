@@ -1,12 +1,12 @@
 """Refactored from the examples at https://github.com/aymericdamien/TensorFlow-Examples"""
 
 import time
+
 IMPORT_START_TIME = time.time()
+import configparser
+import json
 import os
 import sys
-import json
-import configparser
-
 
 # ask AWS to pick up pre-compiled dependencies from the vendored folder ?
 HERE = os.path.dirname(os.path.realpath(__file__))
@@ -16,13 +16,14 @@ sys.path.append(os.path.join(HERE, "vendored"))
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 
 
-import tensorflow as tf  # noqa: E402
 import numpy  # noqa: E402
-IMPORT_END_TIME = time.time()
-print(f"<import {IMPORT_END_TIME - IMPORT_START_TIME} seconds>")
+import tensorflow as tf  # noqa: E402
+
 rng = numpy.random
 rng.seed(42)
 tf.random.set_seed(42)
+import_time = time.time() - IMPORT_START_TIME
+print(f"<import {import_time} seconds>")
 
 
 class TensorFlowRegressionModel:
@@ -140,8 +141,6 @@ def handler(event, context):
             raise ValueError("Input parameter has invalid type: float expected")
     except Exception as ex:
         error_response = {"error_message": "Unexpected error", "stack_trace": str(ex)}
-        return {"import_time": IMPORT_END_TIME - IMPORT_START_TIME}
+        return {"import_time": import_time}
 
-    return {"import_time": IMPORT_END_TIME - IMPORT_START_TIME}
-
-
+    return {"import_time": import_time}

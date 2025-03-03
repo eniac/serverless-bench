@@ -1,25 +1,26 @@
 import io
-import time
+import json
 import os
 import sys
-import json
+import time
+
+import requests
 
 # start = time.time()
 import torch
-
-# end = time.time()
-# torch_import_time = end - start
+from PIL import Image
 
 # start = time.time()
 from torchvision import transforms
 from torchvision.models import resnet50
 
 # end = time.time()
+# torch_import_time = end - start
+
+
+# end = time.time()
 # torchvision_import_time = end - start
 
-from PIL import Image
-
-import requests
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__))))
 
@@ -87,4 +88,4 @@ def handler(event, context=None):
 
 
 if __name__ == "__main__":
-    print(lambda_handler(None))
+    print(handler(None))

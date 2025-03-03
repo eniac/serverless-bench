@@ -1,8 +1,8 @@
-from qiskit_nature.units import DistanceUnit
-from qiskit_nature.second_q.drivers import PySCFDriver
-from qiskit_nature.second_q.mappers import JordanWignerMapper
 from qiskit_algorithms import NumPyMinimumEigensolver
 from qiskit_nature.second_q.algorithms import GroundStateEigensolver
+from qiskit_nature.second_q.drivers import PySCFDriver
+from qiskit_nature.second_q.mappers import JordanWignerMapper
+from qiskit_nature.units import DistanceUnit
 
 
 def lambda_handler(event, context):
@@ -27,4 +27,4 @@ def lambda_handler(event, context):
 
 
 if __name__ == "__main__":
-    print(lambda_handler(42, 42))
+    print(lambda_handler({}, {}))

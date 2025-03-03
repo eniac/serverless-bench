@@ -5,7 +5,7 @@ from qiskit_nature.second_q.mappers import JordanWignerMapper
 from qiskit_nature.units import DistanceUnit
 
 
-def lambda_handler(event, context):
+def handler(event, context):
     # Step 1: Define the molecular structure and set up the driver
     molecule = event["molecule"]
     driver = PySCFDriver(atom=molecule, unit=DistanceUnit.ANGSTROM, basis="sto3g")
@@ -27,4 +27,4 @@ def lambda_handler(event, context):
 
 
 if __name__ == "__main__":
-    print(lambda_handler({}, {}))
+    print(handler({}, {}))

@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 
-def lambda_handler(event, context):
+def handler(event, context):
     # Set a seed for reproducibility
     np.random.seed(event["seed"])
 

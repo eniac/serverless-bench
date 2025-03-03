@@ -1,13 +1,13 @@
-import numpy as np
-import pandas as pd
-
-from sklearn.ensemble import RandomForestRegressor
-from sklearn import metrics
+import logging
+import os
 import pickle
 import random
-import logging
+
 import boto3
-import os
+import numpy as np
+import pandas as pd
+from sklearn import metrics
+from sklearn.ensemble import RandomForestRegressor
 
 BUCKET_NAME = "serverless-torch-xl"
 AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
@@ -108,7 +108,7 @@ def train_model(event, context):
     return model_name
 
 
-def predict_with_model(event, context):
+def handler(event, context):
 
     input_for_prediction = pd.DataFrame(
         {

@@ -2,9 +2,10 @@
 """ImageResize Lambda function handler"""
 from __future__ import print_function
 
+import os
+
 import boto3
 from wand.image import Image
-import os
 
 BUCKET_NAME = "serverless-torch-xl"
 AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
@@ -52,7 +53,7 @@ def resize_image(image, resize_width, resize_height):
     return image
 
 
-def handle_resize(event, context):
+def handler(event, context):
     """
     Handle an S3 event on the target bucket to resize and save to destination bucket
     """

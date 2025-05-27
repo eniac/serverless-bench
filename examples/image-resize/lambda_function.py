@@ -3,20 +3,24 @@
 from __future__ import print_function
 
 import time
+
 IMPORT_START_TIME = time.time()
+import os
+
 import boto3
 from wand.image import Image
-import os
-IMPORT_END_TIME = time.time()
-print(f"<import {IMPORT_END_TIME - IMPORT_START_TIME} seconds>")
+
 BUCKET_NAME = "serverless-torch-xl"
-AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
+AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
 
 session = boto3.Session(
-    aws_access_key_id=AWS_ACCESS_KEY_ID,
-    aws_secret_access_key=AWS_SECRET_ACCESS_KEY
+    aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_SECRET_ACCESS_KEY
 )
+IMPORT_END_TIME = time.time()
+print(f"<import {IMPORT_END_TIME - IMPORT_START_TIME} seconds>")
+
+import_time = IMPORT_END_TIME - IMPORT_START_TIME
 
 
 def resize_image(image, resize_width, resize_height):
@@ -46,9 +50,9 @@ def resize_image(image, resize_width, resize_height):
         resize_width = int(round(resize_height * original_ratio))
 
     if ((image.width - resize_width) + (image.height - resize_height)) < 0:
-        filter_name = 'mitchell'
+        filter_name = "mitchell"
     else:
-        filter_name = 'lanczos2'
+        filter_name = "lanczos2"
 
     image.resize(width=resize_width, height=resize_height, filter=filter_name, blur=1)
 
@@ -105,27 +109,25 @@ def handler(event, context):
     """
     sleep_time = event.get("sleep_time", 0)
 
-    event = {
-        "key_path": "happyFace.jpg"
-    }
+    event = {"key_path": "happyFace.jpg"}
 
     # Obtain the bucket name and key for the event
     bucket_name = BUCKET_NAME
-    key_path = event.get('key_path', "happyFace.jpg")
+    key_path = event.get("key_path", "happyFace.jpg")
 
     # Retrieve the S3 Object
-    s3_connection = boto3.resource('s3')
+    s3_connection = boto3.resource("s3")
     s3_object = s3_connection.Object(bucket_name, key_path)
 
     response = s3_object.get()
 
     # Perform the resize operation
-    with Image(blob=response['Body'].read()) as image:
+    with Image(blob=response["Body"].read()) as image:
         resized_image = resize_image(image, 400, 400)
         resized_data = resized_image.make_blob()
 
     # And finally, upload to the resize bucket the new image
-    s3_resized_object = s3_connection.Object('test-resize', key_path)
+    s3_resized_object = s3_connection.Object("test-resize", key_path)
     time.sleep(sleep_time)
     print("Resized data: ", resized_data)
     # try:

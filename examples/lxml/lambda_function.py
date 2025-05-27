@@ -1,9 +1,13 @@
 import time
+
 IMPORT_START_TIME = time.time()
 import requests
 from lxml import html
-IMPORT_END_TIME = time.time()
-print(f"<import {IMPORT_END_TIME - IMPORT_START_TIME} seconds>")
+
+import_time = time.time() - IMPORT_START_TIME
+print(f"<import {import_time} seconds>")
+
+
 def handler(event, context):
     sleep_time = event.get("sleep_time", 0)
     url = "https://github.com/spyrospav"
@@ -17,10 +21,10 @@ def handler(event, context):
 
     time.sleep(sleep_time)
 
-    return {
-        "result": str(username),
-        "import_time": IMPORT_END_TIME - IMPORT_START_TIME
-    }
+    return {"result": str(username), "import_time": import_time}
+
 
 if __name__ == "__main__":
-    print(handler(42, 42))
+    event = {}
+    context = {}
+    print(handler(event, context))

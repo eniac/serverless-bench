@@ -3,7 +3,7 @@
         {
             "name": "test1",
             "event": {
-                "local_path": "./dna-visualization/",
+                "local_path": ".",
                 "dna1": "gene1.txt",
                 "dna2": "gene2.txt"
             },

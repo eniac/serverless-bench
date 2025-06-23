@@ -1,3 +1,7 @@
+import os
+import time
+os.putenv('TZ', 'US/Eastern')
+time.tzset()
 import json
 from chdb import session as chs
 

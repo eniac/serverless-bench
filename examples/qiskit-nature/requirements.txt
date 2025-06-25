@@ -1,4 +1,5 @@
 pyscf==2.6.2
 qiskit_algorithms==0.3.0
 qiskit_nature==0.7.2
+qiskit==1.1.0
 scipy==1.13.1
